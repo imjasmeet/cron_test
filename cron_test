@@ -1,0 +1,20 @@
+resources:
+  - name: cron_trigger
+    type: CronTrigger
+    configuration:
+      interval: 1/1 * * * *
+#      branches:
+#       include: "^dev"
+#       exclude: "^dev-test.+$"
+
+pipelines:
+  - name: pipeline_scheduled_triggers
+    steps:
+      - name: step_1
+        type: Bash
+        configuration:
+          inputResources:
+            - name: cron_trigger
+        execution:
+          onExecute:
+            - printenv
